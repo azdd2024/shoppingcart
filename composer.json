@@ -39,7 +39,8 @@
     "suggest": {
         "gloudemans/notify": "Simple flash notifications for Laravel"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+"prefer-stable": true,
     "extra": {
         "laravel": {
             "providers": [
