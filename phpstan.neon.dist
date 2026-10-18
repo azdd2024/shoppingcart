@@ -1,0 +1,11 @@
+parameters:
+    level: 5
+    paths:
+        - src
+    ignoreErrors:
+        -
+            message: '#^Access to an undefined property Gloudemans\\Shoppingcart\\CartItem::\$(discount|discountTotal|priceNet|priceTarget|priceTax|priceTotal|subtotal|tax|taxTotal|total)\.$#'
+            identifier: property.notFound
+        -
+            identifier: trait.unused
+            path: src/CanBeBought.php

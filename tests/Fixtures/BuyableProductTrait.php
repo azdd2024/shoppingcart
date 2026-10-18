@@ -2,18 +2,14 @@
 
 namespace Gloudemans\Tests\Shoppingcart\Fixtures;
 
+use Gloudemans\Shoppingcart\CanBeBought;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
 
 class BuyableProductTrait extends Model implements Buyable
 {
-    use \Gloudemans\Shoppingcart\CanBeBought;
+    use CanBeBought;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'id',
         'name',

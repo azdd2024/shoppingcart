@@ -9,7 +9,17 @@
 [![Latest Unstable Version](https://poser.pugx.org/bumbummen99/shoppingcart/v/unstable)](https://packagist.org/packages/bumbummen99/shoppingcart)
 [![License](https://poser.pugx.org/bumbummen99/shoppingcart/license)](https://packagist.org/packages/bumbummen99/shoppingcart)
 
-This is a fork of [Crinsane's LaravelShoppingcart](https://github.com/Crinsane/LaravelShoppingcart) extended with minor features compatible with Laravel 8+. An example integration can be [found here](https://github.com/bumbummen99/LaravelShoppingcartDemo).
+This is a fork of [Crinsane's LaravelShoppingcart](https://github.com/Crinsane/LaravelShoppingcart) extended with minor features. An example integration can be [found here](https://github.com/bumbummen99/LaravelShoppingcartDemo).
+
+## Requirements
+
+| Package | Supported versions |
+|---------|--------------------|
+| PHP     | 8.3, 8.4, 8.5 (`^8.3`) |
+| Laravel | 11.x, 12.x, 13.x |
+| Carbon  | 2.72+ or 3.x |
+
+Laravel 9 and 10 (and PHP < 8.3) are no longer supported by this version. Applications that still run on them can keep using the previous release of the package.
 
 ## Installation
 
@@ -28,6 +38,21 @@ You definitely should publish the `config` file and take a look at it.
     php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config"
 
 This will give you a `cart.php` config file in which you can make changes to the packages behaivor.
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `calculator` | `DefaultCalculator::class` | Class used to calculate prices, taxes and discounts. Use `GrossPrice::class` to treat the item price as a gross price (taxes are calculated by separation). Custom calculators must implement `Gloudemans\Shoppingcart\Contracts\Calculator`. |
+| `tax` | `21` | Default tax rate (percentage) applied to every item. |
+| `database.connection` | `null` | Database connection used by `store()`, `restore()`, `merge()` and `erase()`. `null` uses the default connection. |
+| `database.table` | `shoppingcart` | Table used to store carts. |
+| `destroy_on_logout` | `false` | When `true`, every cart instance is removed from the session when the user logs out. |
+| `format.decimals` | `2` | Default number of decimals of the formatted values. |
+| `format.decimal_point` | `.` | Default decimal separator of the formatted values. |
+| `format.thousand_separator` | `,` | Default thousands separator of the formatted values. |
+
+### Discount behaviour of the `DefaultCalculator` (fork specific)
+
+In this fork the `DefaultCalculator` does **not** subtract the discount from `subtotal`, so `subtotal`, `taxTotal` and `total` are calculated on the full price. The discount is still available through `discount`, `discountTotal`, `priceTarget`, `tax` (per unit) and `priceTax`. The `GrossPrice` calculator keeps the original behaviour and subtracts the discount from the subtotal.
 
 ## Updates
 

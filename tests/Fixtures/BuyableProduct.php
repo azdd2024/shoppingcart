@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class BuyableProduct extends Model implements Buyable
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'id',
         'name',
@@ -28,41 +23,21 @@ class BuyableProduct extends Model implements Buyable
         'weight' => 0,
     ];
 
-    /**
-     * Get the identifier of the Buyable item.
-     *
-     * @return int|string
-     */
     public function getBuyableIdentifier($options = null)
     {
         return $this->id;
     }
 
-    /**
-     * Get the description or title of the Buyable item.
-     *
-     * @return string
-     */
     public function getBuyableDescription($options = null)
     {
         return $this->name;
     }
 
-    /**
-     * Get the price of the Buyable item.
-     *
-     * @return float
-     */
     public function getBuyablePrice($options = null)
     {
         return $this->price;
     }
 
-    /**
-     * Get the price of the Buyable item.
-     *
-     * @return float
-     */
     public function getBuyableWeight($options = null)
     {
         return $this->weight;
